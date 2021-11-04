@@ -57,7 +57,7 @@ for (const folder of commandFolders) {
     }
 }
 
-client.on("guildMemberAvailable", function (member) {
+client.on("guildMemberAvailable", async function (member) {
     const newchan = await member.guild.channels.create(`testing-${member.user.username}`, { // Create Channel
         type: 'text',
         topic: `${member.username} Calculator Testing Channel`,
