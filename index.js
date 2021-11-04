@@ -5,7 +5,12 @@ const { token } = require('./config.json');
 const { readdirSync } = require("fs");
 
 // Create a new client instance
-const client = new Client({ intents: [Intents.FLAGS.GUILDS] });
+const client = new Client({
+    intents: [
+        Intents.FLAGS.GUILDS,
+        Intents.FLAGS.GUILD_MEMBERS,
+    ]
+});
 client.commands = new Collection();
 
 // // When the client is ready, run this code (only once)
@@ -31,6 +36,26 @@ try {
 } catch (err) {
     return
 }
+
+// client.on("guildMemberAdd", async function (member) {
+//     const newchan = await member.guild.channels.create(`testing-${member.user.username}`, { // Create Channel
+//         type: 'text',
+//         topic: `${member.username} Calculator Testing Channel`,
+//         parent: "903031870420308018",
+//         permissionOverwrites: [
+//             {
+//                 id: member.id,
+//                 allow: ["SEND_MESSAGES", "VIEW_CHANNEL"]
+//             },
+//             {
+//                 id: member.guild.roles.everyone,
+//                 deny: ["VIEW_CHANNEL"]
+//             },
+//         ],
+//     }); // Create Channel
+//     await newchan.send({ content: "<@" + member.id + ">\nUse `/calculator`" })
+//     return
+// });
 /**
  * Event Handling
  */
@@ -57,25 +82,6 @@ for (const folder of commandFolders) {
     }
 }
 
-client.on("guildMemberAvailable", async function (member) {
-    const newchan = await member.guild.channels.create(`testing-${member.user.username}`, { // Create Channel
-        type: 'text',
-        topic: `${member.username} Calculator Testing Channel`,
-        parent: "903031870420308018",
-        permissionOverwrites: [
-            {
-                id: member.id,
-                allow: ["SEND_MESSAGES", "VIEW_CHANNEL"]
-            },
-            {
-                id: member.guild.roles.everyone,
-                deny: ["VIEW_CHANNEL"]
-            },
-        ],
-    }); // Create Channel
-    await newchan.send({ content: "<@" + member.id + ">\nUse `/calculator`" })
-    return
-});
 
 process.on("unhandledRejection", async (error) => {
     console.log(error)

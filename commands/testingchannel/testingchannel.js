@@ -13,6 +13,7 @@ module.exports = {
     async execute(interaction) {
         if (interaction.user.id !== "531227581081452550") {
             interaction.reply({ content: "You can't do that!", ephemeral: true })
+            return
         }
         const member = interaction.options.getUser('user');
         const newchan = await interaction.guild.channels.create(`testing-${member.username}`, { // Create Channel
