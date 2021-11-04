@@ -100,7 +100,7 @@ module.exports = {
                     .setCustomId('buttonequals'),
             );
 
-        const mainmsg = await interaction.reply({ content: "\n0", components: [row1, row2, row3, row4, row5], fetchReply: true })
+        const mainmsg = await interaction.reply({ content: "0", components: [row1, row2, row3, row4, row5], fetchReply: true })
 
         // Switch
         async function addstring(number) {
@@ -114,6 +114,22 @@ module.exports = {
                 mainmsg.edit({ content: newequalback[0] + number })
             } else {
                 mainmsg.edit({ content: mainmsg.content + number })
+            }
+            // if (adstrcont.includes("=")) {
+            //     const newequalback = adstrcont.split("=")
+            //     // const eqmsg = newmsg
+            //     // const equalmsg = eqmsg.slice(0, eqmsg.length - 1);
+            //     mainmsg.edit({ content: newequalback[0] })
+            // }
+        }
+        async function addsymb(symbol) {
+            const adstrcont = mainmsg.content
+            if (mainmsg.content === "0") {
+                return
+            } else if (mainmsg.content.slice(-1) == symbol) {
+                return
+            } else {
+                mainmsg.edit({ content: mainmsg.content + symbol })
             }
             // if (adstrcont.includes("=")) {
             //     const newequalback = adstrcont.split("=")
@@ -153,7 +169,7 @@ module.exports = {
                     interaction.deferUpdate()
                     break;
                 case "buttonstar":
-                    addstring("\u200b*")
+                    addsymb("*")
                     interaction.deferUpdate()
                     break;
                 case "button4":
@@ -169,7 +185,7 @@ module.exports = {
                     interaction.deferUpdate()
                     break;
                 case "buttonminus":
-                    addstring("-")
+                    addsymb("-")
                     interaction.deferUpdate()
                     break;
                 case "button1":
@@ -185,11 +201,11 @@ module.exports = {
                     interaction.deferUpdate()
                     break;
                 case "buttonadd":
-                    addstring("+")
+                    addsymb("+")
                     interaction.deferUpdate()
                     break;
                 case "buttondot":
-                    addstring(".")
+                    addsymb(".")
                     interaction.deferUpdate()
                     break;
                 case "buttonzero":
@@ -225,6 +241,7 @@ module.exports = {
                         }
                         break;
                     } catch (error) {
+                        // console.log(error)
                         interaction.reply({ content: "Syntax Error!", ephemeral: true })
                     }
             }
