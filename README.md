@@ -1,3 +1,3 @@
-# calculator-bot
-# calculator-bot
-# discord-calculator
+# Discord Button Calculator
+
+It works, It's ugly code tho 
